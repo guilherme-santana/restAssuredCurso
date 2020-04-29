@@ -1,13 +1,9 @@
 package br.testeapi.rest;
 
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.containsString;
-import static org.hamcrest.Matchers.greaterThan;
-import static org.hamcrest.Matchers.is;
-
+import static org.hamcrest.Matchers.*;
 import org.junit.Assert;
 import org.junit.Test;
-
 import io.restassured.RestAssured;
 import io.restassured.http.Method;
 import io.restassured.path.json.JsonPath;
