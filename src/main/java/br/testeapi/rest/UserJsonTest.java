@@ -3,6 +3,7 @@ package br.testeapi.rest;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.*;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import org.junit.Assert;
@@ -128,5 +129,20 @@ public class UserJsonTest {
 			.body("salary.findAll{it != null}sum()", is(closeTo(3734.5678f, 0.001)))
 			.body("salary.findAll{it != null}sum()", allOf(greaterThan(3000d), lessThan(5000d)))
 		;
+	}
+	
+	@Test
+	public void devoUnirJsonPathComJava() {
+		ArrayList<String> names =
+		given()
+		.when()
+			.get("http://restapi.wcaquino.me/users")
+		.then()
+			.statusCode(200)
+			.extract().path("name.findAll{it.startsWith('Maria')}")
+		;
+		Assert.assertEquals(1, names.size());
+		Assert.assertTrue(names.get(0).equalsIgnoreCase("MaRIA JoaQUINA"));
+		Assert.assertEquals(names.get(0).toUpperCase(), "maria joaquina".toUpperCase());
 	}
 }
