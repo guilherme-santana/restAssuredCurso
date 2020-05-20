@@ -145,4 +145,17 @@ public class UserJsonTest {
 		Assert.assertTrue(names.get(0).equalsIgnoreCase("MaRIA JoaQUINA"));
 		Assert.assertEquals(names.get(0).toUpperCase(), "maria joaquina".toUpperCase());
 	}
+	
+	@Test
+	public void devoExtrairUsuario() {
+		ArrayList<String> ids =
+		given()
+		.when()
+			.get("http://restapi.wcaquino.me/users")
+		.then()
+			.statusCode(200)
+			.extract().path("id")
+		;
+		Assert.assertEquals(3, ids.size());
+	}
 }
